@@ -29,6 +29,9 @@ class CalendarAppBar extends StatefulWidget implements PreferredSizeWidget {
   ///function which returns currently selected date
   final Function onDateChanged;
 
+  ///the first date selected on the calendar
+  final DateTime? initialSelectedDate;
+
   ///definition of your custom padding
   final double? padding;
 
@@ -47,6 +50,7 @@ class CalendarAppBar extends StatefulWidget implements PreferredSizeWidget {
     required this.lastDate,
     required this.firstDate,
     required this.onDateChanged,
+    this.initialSelectedDate,
     this.events,
     this.fullCalendar,
     this.backButton,
@@ -131,7 +135,9 @@ class _CalendarAppBarState extends State<CalendarAppBar> {
           : fullCalendar = widget.fullCalendar;
 
       ///initializing selectedDate
-      selectedDate = widget.lastDate;
+      selectedDate = widget.initialSelectedDate != null
+          ? widget.initialSelectedDate
+          : widget.lastDate;
 
       ///initializing referenceDate
       referenceDate = selectedDate;
